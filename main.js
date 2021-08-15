@@ -12,8 +12,7 @@ function createWindow () {
     // webPreferences: {
     //   preload: path.join(__dirname, 'preload.js')
     // },
-    backgroundColor: "#36393F",
-    icon: path.join(__dirname, 'W.A.C.ico')
+    icon: path.join(__dirname, 'assets/W.A.C.ico')
   });
 
   // on affiche le contenu de l'index.html
