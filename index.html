@@ -30,7 +30,7 @@
   <body class="text-center">
 
     <main class="form-signin">
-      <form>
+      <form class="needs-validation">
         <img class="mb-4" src="assets/webhook-logo.png" alt="webhook-logo" width="72">
         <h1 class="h3 mb-3 fw-normal">Add a webhook</h1>
 
@@ -43,6 +43,28 @@
         <p class="mt-5 mb-3 text-muted">&copy; 2021 - Warriors Army Corp</p>
       </form>
     </main>
+
+    <script type="text/javascript">
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add('was-validated');
+            }, false);
+          });
+      })()
+    </script>
 
   </body>
 </html>
