@@ -2,6 +2,25 @@
 const { app, BrowserWindow } = require('electron');
 // importation du package "path" pour recréer les chemins
 const path = require('path');
+// importation du package "fs" pour lire le fichier json
+const fs = require('fs');
+
+// function checkWebhook() {
+//   var res = false;
+//
+//   fs.readFile('webhooks-stack.json', async (err, data) => {
+//     if (err) res = "error";
+//
+//     let json = await JSON.parse(data);
+//     if (json.length > 0) {
+//       res = true;
+//     }
+//   });
+//
+//   return res;
+// }
+//
+// console.log(checkWebhook());
 
 // fonction de création de la fenêtre
 function createWindow () {
@@ -9,9 +28,9 @@ function createWindow () {
   const win = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    // webPreferences: {
-    //   preload: path.join(__dirname, 'preload.js')
-    // },
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    },
     icon: path.join(__dirname, 'assets/W.A.C.ico')
   });
 

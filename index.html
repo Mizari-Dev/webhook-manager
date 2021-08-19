@@ -7,63 +7,85 @@
     <meta name="author" content="Mizari">
     <title>Add your first webhook</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap -->
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
     <link href="css/bootstrap/signin.css" rel="stylesheet">
+
+    <!-- custom -->
+    <link rel="stylesheet" href="css/custom/style.css">
 
   </head>
   <body class="text-center">
 
     <main class="form-signin">
-      <form class="needs-validation">
+      <form method="GET" class="needs-validation" novalidate>
         <img class="mb-4" src="assets/webhook-logo.png" alt="webhook-logo" width="72">
         <h1 class="h3 mb-3 fw-normal">Add a webhook</h1>
 
         <div class="form-floating">
-          <input type="text" class="form-control bg-dark" id="floatingInput" placeholder="https://discord.com/api/webhooks/{id}/{token}">
+          <input name="URL" type="text" class="form-control" id="floatingInput" placeholder=" " required>
           <label for="floatingInput">Webhook URL</label>
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+        <div id="errMsg"></div>
         <p class="mt-5 mb-3 text-muted">&copy; 2021 - Warriors Army Corp</p>
       </form>
     </main>
 
-    <script type="text/javascript">
+    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
       (function () {
         'use strict'
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation');
+        var forms = document.querySelectorAll('.needs-validation')
 
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
           .forEach(function (form) {
             form.addEventListener('submit', function (event) {
               if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
+                event.preventDefault()
+                event.stopPropagation()
               }
 
-              form.classList.add('was-validated');
-            }, false);
-          });
+              form.classList.add('was-validated')
+            }, false)
+          })
       })()
+    </script>
+
+    <!-- check params -->
+    <script>
+      function errMsg(text) {
+        var button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.setAttribute("class", "btn-close");
+        button.setAttribute("data-bs-dismiss", "alert");
+        button.setAttribute("aria-label", "Close");
+
+        var Alert = document.getElementById('errMsg');
+        Alert.setAttribute("class", "alert alert-danger alert-dismissible fade show mt-3");
+        Alert.setAttribute("role", "alert");
+        Alert.innerHTML = text;
+        Alert.appendChild(button);
+      }
+
+      const params = new URLSearchParams(location.search);
+
+      if (params.get("URL")) {
+        const webhook = params.get("URL");
+        fetch(webhook).then(res => res.json()).then(json => {
+          if(json.type && json.id && json.name && json.channel_id && json.guild_id && json.token){
+            errMsg("yes")
+          } else {
+            errMsg("You have to paste a valid webhook URL.");
+          }
+        }).catch(() => {
+          errMsg("You have to paste the webhook URL.");
+        });
+      }
     </script>
 
   </body>
