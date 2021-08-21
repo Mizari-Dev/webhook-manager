@@ -1,3 +1,8 @@
+body {
+  background-color: #36393F;
+  height: 100%;
+}
+
 .form-control {
   background-color: #40444B;
   border:1px solid #40444B;
@@ -8,4 +13,19 @@
   background-color: #40444B;
   border:1px solid #40444B;
   color: #fff;
+}
+
+.pp-webhook{
+  width: 32px;
+  height: 32px;
+}
+
+.nav-link:hover{
+  background-color: #33363C;
+  cursor: pointer;
+}
+
+.text-cut{
+  overflow:hidden;
+  text-overflow: ellipsis;
 }

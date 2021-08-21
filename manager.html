@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="There, you can manage your webhooks.">
+    <meta name="author" content="Mizari">
+    <title>Manage your webhooks</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap/sidebars.css" rel="stylesheet">
+
+    <!-- custom -->
+    <link rel="stylesheet" href="css/custom/style.css">
+
+  </head>
+  <body id="manager">
+
+    <main>
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px;">
+        <ul class="nav nav-pills flex-column mb-auto" id="left-menu">
+        </ul>
+      </div>
+
+      <div class="container">
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 - Warriors Army Corp</p>
+      </div>
+
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px;">
+        <div class="card bg-dark text-center">
+          <div class="card-header">
+            Add a new webhook
+          </div>
+          <div class="card-body">
+            <form method="GET" class="needs-validation" id="addWebhook" novalidate>
+              <div class="form-floating">
+                <input name="URL" type="text" class="form-control" id="floatingInput" placeholder=" " required>
+                <label for="floatingInput">Webhook URL</label>
+              </div>
+
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Add</button>
+              <div id="errMsg"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- bootstrap scripts -->
+    <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+
+              form.classList.add('was-validated')
+            }, false)
+          })
+      })()
+    </script>
+
+  </body>
+</html>

@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="css/custom/style.css">
 
   </head>
-  <body class="text-center">
+  <body class="text-center" id="starter">
 
     <main class="form-signin">
-      <form method="GET" class="needs-validation" novalidate>
+      <form method="GET" class="needs-validation" id="addWebhook" novalidate>
         <img class="mb-4" src="assets/webhook-logo.png" alt="webhook-logo" width="72">
         <h1 class="h3 mb-3 fw-normal">Add a webhook</h1>
 
@@ -54,38 +54,6 @@
             }, false)
           })
       })()
-    </script>
-
-    <!-- check params -->
-    <script>
-      function errMsg(text) {
-        var button = document.createElement("button");
-        button.setAttribute("type", "button");
-        button.setAttribute("class", "btn-close");
-        button.setAttribute("data-bs-dismiss", "alert");
-        button.setAttribute("aria-label", "Close");
-
-        var Alert = document.getElementById('errMsg');
-        Alert.setAttribute("class", "alert alert-danger alert-dismissible fade show mt-3");
-        Alert.setAttribute("role", "alert");
-        Alert.innerHTML = text;
-        Alert.appendChild(button);
-      }
-
-      const params = new URLSearchParams(location.search);
-
-      if (params.get("URL")) {
-        const webhook = params.get("URL");
-        fetch(webhook).then(res => res.json()).then(json => {
-          if(json.type && json.id && json.name && json.channel_id && json.guild_id && json.token){
-            errMsg("yes")
-          } else {
-            errMsg("You have to paste a valid webhook URL.");
-          }
-        }).catch(() => {
-          errMsg("You have to paste the webhook URL.");
-        });
-      }
     </script>
 
   </body>
